@@ -1,0 +1,32 @@
+# Código compilado
+*.class
+target/**
+target-eclipse/**
+
+# Empaquetados
+*.7z
+*.dmg
+*.gz
+*.iso
+#Se comenta por las bibliotecas que necesita Grails Wrapper
+#*.jar
+*.rar
+*.tar
+*.zip
+
+# Logs
+*.log
+
+# Archivos de Eclipse e IntelliJ IDEA
+.classpath
+.project
+.settings
+*.iml
+*.ipr
+*.iws
+.idea
+
+#Archivos que genera H2 para almacenar el estado de la BD cuando la conf del datasource es 'file' en lugar de 'mem'
+devDb.h2.db
+devDb.lock.db
+devDb.trace.db
