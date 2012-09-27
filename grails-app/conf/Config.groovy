@@ -90,4 +90,9 @@ log4j = {
            'org.springframework',
            'org.hibernate',
            'net.sf.ehcache.hibernate'
+
+    // Logging para la aplicacion
+    debug  'grails.app.controllers'
+    debug  'grails.app.domain'
+    debug  'grails.app.services'
 }
