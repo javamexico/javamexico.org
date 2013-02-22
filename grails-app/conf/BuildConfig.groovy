@@ -41,7 +41,6 @@ grails.project.dependency.resolution = {
         runtime ":hibernate:$grailsVersion"
         runtime ":jquery:1.7.2"
         runtime ":resources:1.1.6"
-        runtime ":twitter-bootstrap:2.1.0.1"
         runtime ":filterpane:2.0.1.1"
         runtime ":database-migration:1.1"
         runtime ':fields:1.0.1'
@@ -49,7 +48,8 @@ grails.project.dependency.resolution = {
         compile ":spring-security-core:1.2.7.3"
         compile ":joda-time:1.4"
         compile ':cache:1.0.0'
-        compile ":less-resources:1.3.0.2"
+        compile ":lesscss-resources:1.3.1"
+        compile ":create-domain-uml:0.5"
         runtime ":svn:1.0.0.M1"
 
         test ":spock:0.6"
