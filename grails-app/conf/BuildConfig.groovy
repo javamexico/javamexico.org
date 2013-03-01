@@ -41,7 +41,6 @@ grails.project.dependency.resolution = {
         runtime ":hibernate:$grailsVersion"
         runtime ":jquery:1.7.2"
         runtime ":resources:1.1.6"
-        runtime ":filterpane:2.0.1.1"
         runtime ":database-migration:1.1"
         runtime ':fields:1.0.1'
         compile ":jquery-ui:1.8.15"

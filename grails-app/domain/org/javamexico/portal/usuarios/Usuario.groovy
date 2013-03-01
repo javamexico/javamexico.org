@@ -1,5 +1,6 @@
 package org.javamexico.portal.usuarios
 
+import org.javamexico.portal.contenido.Contenido
 import org.javamexico.portal.tags.Tag
 
 class Usuario {
@@ -26,7 +27,8 @@ class Usuario {
             habilidades:Habilidad,
             certificaciones:Certificacion,
             escuelas:Escuela,
-            tags:Tag
+            tags:Tag,
+            contenidos:Contenido
     ]
 
     //Propiedades de control
@@ -40,6 +42,7 @@ class Usuario {
     static constraints = {
         username blank: false, unique: true
         password blank: false
+        dateDeleted nullable: true
     }
 
     static mapping = {
