@@ -64,10 +64,11 @@ environments {
         grails.logging.jul.usebridge = true
         grails.dbconsole.enabled = true
         grails.dbconsole.urlRoot = '/admin/dbconsole'
+        grails.plugins.springsecurity.active = false
     }
     production {
         grails.logging.jul.usebridge = false
-        // TODO: grails.serverURL = "http://www.changeme.com"
+        grails.serverURL = "http://www.javamexico.org/"
     }
 }
 
