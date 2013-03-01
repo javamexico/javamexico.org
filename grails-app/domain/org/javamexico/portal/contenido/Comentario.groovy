@@ -1,12 +1,19 @@
 package org.javamexico.portal.contenido
 
+import org.javamexico.portal.tags.Tag
 import org.javamexico.portal.usuarios.Usuario
 
-class Comentario {
+class Comentario extends Contenido {
 
+    String titulo
     String texto
 
-    static belongsTo = [usuario:Usuario, contenido:Contenido]
+    Date dateCreated
+    Date lastUpdated
+    Date dateDeleted
+
+    static belongsTo = [usuario:Usuario, contenidos:Contenido]
+    static hasMany = [tags:Tag, comentarios:Comentario]
 
     static constraints = {
     }
