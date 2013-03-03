@@ -5,16 +5,6 @@ import org.javamexico.portal.usuarios.Usuario
 
 class Pregunta extends Contenido{
 
-    String titulo
-    String texto
-
-    Date dateCreated
-    Date lastUpdated
-    Date dateDeleted
-
-    static belongsTo = [usuario:Usuario]
-    static hasMany = [tags:Tag, comentarios:Comentario, votos:Voto]
-
     static constraints = {
     }
 }
