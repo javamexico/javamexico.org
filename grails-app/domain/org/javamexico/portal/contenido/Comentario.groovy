@@ -3,10 +3,12 @@ package org.javamexico.portal.contenido
 import org.javamexico.portal.tags.Tag
 import org.javamexico.portal.usuarios.Usuario
 
-class Comentario extends Contenido {
+class Comentario {
 
     String titulo
     String texto
+    String hostname
+    Integer status
 
     Date dateCreated
     Date lastUpdated
