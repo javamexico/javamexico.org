@@ -5,6 +5,8 @@ import org.javamexico.portal.usuarios.Usuario
 
 class TemaForo extends Contenido{
 
+    static belongsTo = [foro:Foro]
+
     static constraints = {
     }
 }
