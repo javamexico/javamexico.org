@@ -2,6 +2,7 @@ package org.javamexico.portal.contenido
 
 import org.javamexico.portal.tags.Tag
 import org.javamexico.portal.usuarios.Usuario
+import org.joda.time.LocalDate
 
 abstract class Contenido {
 
@@ -10,14 +11,15 @@ abstract class Contenido {
     String hostname
     Integer status
 
-    Date dateCreated
-    Date lastUpdated
-    Date dateDeleted
+    LocalDate dateCreated
+    LocalDate lastUpdated
+    LocalDate dateDeleted
 
     static belongsTo = [usuario:Usuario]
     static hasMany = [tags:Tag, comentarios:Comentario, votos:Voto]
 
     static constraints = {
+        dateDeleted nullable: true
     }
 
 }

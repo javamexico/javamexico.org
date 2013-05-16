@@ -2,6 +2,7 @@ package org.javamexico.portal.usuarios
 
 import org.javamexico.portal.contenido.Contenido
 import org.javamexico.portal.tags.Tag
+import org.joda.time.LocalDate
 
 class Usuario {
 
@@ -18,7 +19,7 @@ class Usuario {
     //Informacion del usuario
     String nombre
     String correo
-    Date fechaNacimiento
+    LocalDate fechaNacimiento
     String ubicacion
     String sitioWeb
     String bio
@@ -35,9 +36,9 @@ class Usuario {
     Integer estatus = 0
     Integer reputacion = 0
     String token = ""
-    Date dateCreated
-    Date lastUpdated
-    Date dateDeleted
+    LocalDate dateCreated
+    LocalDate lastUpdated
+    LocalDate dateDeleted
 
     static constraints = {
         username blank: false, unique: true
