@@ -34,7 +34,7 @@ grails.project.dependency.resolution = {
     dependencies {
         // specify dependencies here under either 'build', 'compile', 'runtime', 'test' or 'provided' scopes eg.
 
-        // runtime 'mysql:mysql-connector-java:5.1.20'
+        compile "org.jadira.usertype:usertype.jodatime:1.9"
     }
 
     plugins {
@@ -51,7 +51,7 @@ grails.project.dependency.resolution = {
         compile ":create-domain-uml:0.5"
         runtime ":svn:1.0.0.M1"
 
-        test ":spock:0.6"
+        test ":spock:0.7"
 
         build ":tomcat:$grailsVersion"
     }
