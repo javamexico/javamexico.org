@@ -6,12 +6,12 @@ class Voto {
 
     Boolean up
 
-    static belongsTo = [usuario:Usuario]
+    static belongsTo = [usuario:Usuario, contenido:Contenido]
 
     Date dateCreated
     Date lastUpdated
-    Date dateDeleted
 
     static constraints = {
+        usuario unique: ['contenido']
     }
 }
