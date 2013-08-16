@@ -1,10 +1,10 @@
 <!doctype html>
 <html>
-	<head>
-		<meta name="layout" content="bootstrap"/>
+    <head>
+        <meta name="layout" content="bootstrap"/>
         <title><g:message code="app.name"/>></title>
-	</head>
-	<body>
+    </head>
+    <body>
         <div class="row-fluid">
             <aside id="application-status" class="span3">
                 <div class="well sidebar-nav">
@@ -43,5 +43,5 @@
 
             </section>
         </div>
-	</body>
+    </body>
 </html>
