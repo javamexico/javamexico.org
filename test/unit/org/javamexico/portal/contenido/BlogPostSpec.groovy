@@ -20,7 +20,7 @@ class BlogPostSpec extends Specification {
     Usuario benek
 
     def setup(){
-        //Se inyecta metodo de SpringSecurity via metaprogramacion
+        //Se inyecta metodo de SpringSecurity a la metaclase
         Usuario.metaClass.encodePassword = { -> }
         oscar = new Usuario(
                 username: 'OscarRyz',
@@ -67,17 +67,17 @@ class BlogPostSpec extends Specification {
                     titulo: 'Primer post de prueba en mi blog',
                     texto: 'Esta es una prueba de un post en mi blog... <b>hola</b>',
                     hostname: '8.8.8.8',
-                    status: 1,
+                    status: EstatusContenidoEnum.PUBLICADO,
                     usuario: benek,
                     tags: [t1, t2, t3],
 
-            ).save()
+            ).save(failOnError: true)
         then: "el post debe encontrarse en la BD con los datos ingresados"
             BlogPost post = BlogPost.findByUsuario(benek);
             with(post){
-                usuario.username == 'benek'
-                titulo == 'Primer post de prueba en mi blog'
-                hostname == '8.8.8.8'
+                post.usuario.username == 'benek'
+                post.titulo == 'Primer post de prueba en mi blog'
+                post.hostname == '8.8.8.8'
             }
     }
 
@@ -89,7 +89,7 @@ class BlogPostSpec extends Specification {
                         titulo: "Post $it",
                         texto: "Esta es una prueba de un post en mi blog... $it",
                         hostname: "8.8.8.$it",
-                        status: 1,
+                        status: EstatusContenidoEnum.PUBLICADO,
                         usuario: lista[it]
                 ).save()
             }
@@ -109,7 +109,7 @@ class BlogPostSpec extends Specification {
                         titulo: "Post $it",
                         texto: "Esta es una prueba de un post en mi blog... $it",
                         hostname: "8.8.8.$it",
-                        status: 1,
+                        status: EstatusContenidoEnum.PUBLICADO,
                         usuario: lista[it]
                 ).save()
             }

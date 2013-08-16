@@ -21,7 +21,7 @@ class VotoController {
         votoInstance.contenido = Pregunta.get(params['contenidoId'] as int)
         votoInstance.usuario = Usuario.get(1)
         log.debug("Voto al contenido: $votoInstance.contenido.id")
-        if (!votoInstance.save(flush: true, failOnError: true)) {
+        if (!votoInstance.save(flush: true)) {
             render view: 'create', model: [votoInstance: votoInstance]
             return
         }
