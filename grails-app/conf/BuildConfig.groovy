@@ -43,7 +43,7 @@ grails.project.dependency.resolution = {
         runtime ":jquery:1.7.2"
         runtime ":resources:1.1.6"
         runtime ":database-migration:1.1"
-        runtime ':fields:1.0.1'
+        runtime ':fields:1.3'
         compile ":jquery-ui:1.8.15"
         compile ":spring-security-core:1.2.7.3"
         compile ":joda-time:1.4"
