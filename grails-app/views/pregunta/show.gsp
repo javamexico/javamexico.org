@@ -6,10 +6,11 @@
         <meta name="layout" content="bootstrap">
         <g:set var="entityName" value="${message(code: 'pregunta.label', default: 'Pregunta')}" />
         <title><g:message code="default.show.label" args="[entityName]" /></title>
+        <g:javascript library="jquery"/>
     </head>
     <body>
         <div class="row-fluid">
-            
+
             <div class="span3">
                 <div class="well">
                     <ul class="nav nav-list">
@@ -29,118 +30,85 @@
                     </ul>
                 </div>
             </div>
-            
+
             <div class="span9">
 
-                <div class="page-header">
-                    <h1><g:message code="default.show.label" args="[entityName]" /></h1>
+                <g:if test="${flash.message}">
+                    <bootstrap:alert class="alert-info">${flash.message}</bootstrap:alert>
+                </g:if>
+                <div>
+                    <g:if test="${preguntaInstance?.titulo}">
+                        <h3><g:fieldValue bean="${preguntaInstance}" field="titulo"/></h3>
+                    </g:if>
                 </div>
 
-                <g:if test="${flash.message}">
-                <bootstrap:alert class="alert-info">${flash.message}</bootstrap:alert>
-                </g:if>
-
-                <dl>
-                
-                    <g:if test="${preguntaInstance?.dateDeleted}">
-                        <dt><g:message code="pregunta.dateDeleted.label" default="Date Deleted" /></dt>
-                        
-                            <dd><g:fieldValue bean="${preguntaInstance}" field="dateDeleted"/></dd>
-                        
-                    </g:if>
-                
-                    <g:if test="${preguntaInstance?.comentarios}">
-                        <dt><g:message code="pregunta.comentarios.label" default="Comentarios" /></dt>
-                        
-                            <g:each in="${preguntaInstance.comentarios}" var="c">
-                            <dd><g:link controller="comentario" action="show" id="${c.id}">${c?.encodeAsHTML()}</g:link></dd>
-                            </g:each>
-                        
-                    </g:if>
-                
-                    <g:if test="${preguntaInstance?.dateCreated}">
-                        <dt><g:message code="pregunta.dateCreated.label" default="Date Created" /></dt>
-                        
-                            <dd><g:fieldValue bean="${preguntaInstance}" field="dateCreated"/></dd>
-                        
-                    </g:if>
-                
-                    <g:if test="${preguntaInstance?.hostname}">
-                        <dt><g:message code="pregunta.hostname.label" default="Hostname" /></dt>
-                        
-                            <dd><g:fieldValue bean="${preguntaInstance}" field="hostname"/></dd>
-                        
-                    </g:if>
-                
-                    <g:if test="${preguntaInstance?.lastUpdated}">
-                        <dt><g:message code="pregunta.lastUpdated.label" default="Last Updated" /></dt>
-                        
-                            <dd><g:fieldValue bean="${preguntaInstance}" field="lastUpdated"/></dd>
-                        
-                    </g:if>
-                
-                    <g:if test="${preguntaInstance?.status}">
-                        <dt><g:message code="pregunta.status.label" default="Status" /></dt>
-                        
-                            <dd><g:fieldValue bean="${preguntaInstance}" field="status"/></dd>
-                        
-                    </g:if>
-                
-                    <g:if test="${preguntaInstance?.tags}">
-                        <dt><g:message code="pregunta.tags.label" default="Tags" /></dt>
-                        
-                            <g:each in="${preguntaInstance.tags}" var="t">
-                            <dd><g:link controller="tag" action="show" id="${t.id}">${t?.encodeAsHTML()}</g:link></dd>
-                            </g:each>
-                        
-                    </g:if>
-                
-                    <g:if test="${preguntaInstance?.texto}">
-                        <dt><g:message code="pregunta.texto.label" default="Texto" /></dt>
-                        
-                            <dd><g:fieldValue bean="${preguntaInstance}" field="texto"/></dd>
-                        
-                    </g:if>
-                
-                    <g:if test="${preguntaInstance?.titulo}">
-                        <dt><g:message code="pregunta.titulo.label" default="Titulo" /></dt>
-                        
-                            <dd><g:fieldValue bean="${preguntaInstance}" field="titulo"/></dd>
-                        
-                    </g:if>
-                
-                    <g:if test="${preguntaInstance?.usuario}">
-                        <dt><g:message code="pregunta.usuario.label" default="Usuario" /></dt>
-                        
-                            <dd><g:link controller="usuario" action="show" id="${preguntaInstance?.usuario?.id}">${preguntaInstance?.usuario?.encodeAsHTML()}</g:link></dd>
-                        
-                    </g:if>
-                
-                    <g:if test="${preguntaInstance?.votos}">
-                        <dt><g:message code="pregunta.votos.label" default="Votos" /></dt>
-                        
-                            <g:each in="${preguntaInstance.votos}" var="v">
-                            <dd><g:link controller="voto" action="show" id="${v.id}">${v?.encodeAsHTML()}</g:link></dd>
-                            </g:each>
-                        
-                    </g:if>
-                
-                </dl>
-
-                <g:form>
-                    <g:hiddenField name="id" value="${preguntaInstance?.id}" />
-                    <div class="form-actions">
-                        <g:link class="btn" action="edit" id="${preguntaInstance?.id}">
-                            <i class="icon-pencil"></i>
-                            <g:message code="default.button.edit.label" default="Edit" />
-                        </g:link>
-                        <button class="btn btn-danger" type="submit" name="_action_delete">
-                            <i class="icon-trash icon-white"></i>
-                            <g:message code="default.button.delete.label" default="Delete" />
-                        </button>
+                <div class="container-fluid well well-large">
+                    <div class="row-fluid">
+                        <div class="span1">
+                            <p></p>
+                            <div id="up">
+                                <g:remoteLink method="POST" controller="voto" action="create" update="votos${preguntaInstance.id}"
+                                              params="${[up:true, contenidoId:preguntaInstance.id]}"
+                                              onFailure="alert('Solamente puedes emitir un voto');">+1</g:remoteLink>
+                            </div>
+                            <div id="votos${preguntaInstance.id}">${preguntaInstance.votos.size()}</div>
+                            -1
+                        </div>
+                        <div class="span3">
+                            <g:if test="${preguntaInstance?.usuario}">
+                                <strong><g:message code="pregunta.usuario.label" default="Autor: " /></strong>
+                                <g:link controller="usuario" action="show" id="${preguntaInstance.usuario.id}"><g:fieldValue bean="${preguntaInstance}" field="usuario.nombre"/></g:link>
+                            </g:if>
+                        </div>
+                        <div class="span8">
+                            <g:if test="${preguntaInstance?.status}">
+                                <strong><g:message code="pregunta.status.label" default="Estado: " /></strong>
+                                <g:fieldValue bean="${preguntaInstance}" field="status.etiqueta"/>
+                            </g:if>
+                        </div>
+                        <div class="span3">
+                            <g:if test="${preguntaInstance?.dateCreated}">
+                                <strong><g:message code="pregunta.dateCreated.label" default="Creado: " /></strong>
+                                <g:fieldValue bean="${preguntaInstance}" field="dateCreated"/>
+                            </g:if>
+                        </div>
+                        <div class="span3">
+                            <g:if test="${preguntaInstance?.lastUpdated}">
+                                <strong><g:message code="pregunta.lastUpdated.label" default="Modificado: " /></strong>
+                                <g:fieldValue bean="${preguntaInstance}" field="lastUpdated"/>
+                            </g:if>
+                        </div>
+                        <div class="span5">
+                            <g:if test="${preguntaInstance?.hostname}">
+                                <strong><g:message code="pregunta.hostname.label" default="IP: " /></strong>
+                                <g:fieldValue bean="${preguntaInstance}" field="hostname"/>
+                            </g:if>
+                        </div>
+                        <div class="span11">
+                            <g:if test="${preguntaInstance?.texto}">
+                                <strong><g:message code="pregunta.texto.label" default="Pregunta: " /></strong>
+                                <p>
+                                    <g:fieldValue bean="${preguntaInstance}" field="texto"/>
+                                </p>
+                            </g:if>
+                        </div>
+                        <div class="">
+                            <g:form>
+                                <g:hiddenField name="id" value="${preguntaInstance?.id}" />
+                                <div>
+                                    <g:link class="btn btn-primary" action="edit" id="${preguntaInstance?.id}">
+                                        <i class="icon-pencil icon-white"></i>
+                                        <g:message code="default.button.edit.label" default="Edit" />
+                                    </g:link>
+                                    <button class="btn btn-danger" type="submit" name="_action_delete">
+                                        <i class="icon-trash icon-white"></i>
+                                        <g:message code="default.button.delete.label" default="Delete" />
+                                    </button>
+                                </div>
+                            </g:form>
+                        </div>
                     </div>
-                </g:form>
-
+                </div>
             </div>
 
         </div>

@@ -44,16 +44,7 @@
                 <g:each in="${preguntaInstanceList}" var="preguntaInstance">
                     <table class="table">
                         <tr>
-                            <td rowspan="3">
-                                <div id="up">
-                                    <g:remoteLink method="POST" controller="voto" action="create" update="votos${preguntaInstance.id}"
-                                                  params="${[up:true, contenidoId:preguntaInstance.id]}"
-                                                  onFailure="alert('Solamente puedes emitir un voto');">+1</g:remoteLink>
-                                </div>
-                                <div id="votos${preguntaInstance.id}">${preguntaInstance.votos.size()}</div>
-                                -1
-                            </td>
-                            <td colspan="6"><g:link action="show" id="${preguntaInstance.id}"><h3>${preguntaInstance.titulo}</h3></g:link></td>
+                            <td><g:link action="show" id="${preguntaInstance.id}"><h3>${preguntaInstance.titulo}</h3></g:link></td>
                         </tr>
                         <tr>
 
