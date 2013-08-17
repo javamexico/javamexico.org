@@ -5,7 +5,7 @@ import org.springframework.dao.DataIntegrityViolationException
 
 class VotoController {
 
-    static allowedMethods = [create: ['POST'], edit: ['POST'], delete: 'POST']
+    static allowedMethods = [create: ['GET', 'POST'], edit: ['GET', 'POST'], delete: 'POST']
 
     /*def index() {
         redirect action: 'list', params: params
@@ -21,7 +21,7 @@ class VotoController {
         votoInstance.contenido = Pregunta.get(params['contenidoId'] as int)
         votoInstance.usuario = Usuario.get(1)
         log.debug("Voto al contenido: $votoInstance.contenido.id")
-        if (!votoInstance.save(flush: true)) {
+        if (!votoInstance.save(flush: true, failOnError: true)) {
             render view: 'create', model: [votoInstance: votoInstance]
             return
         }

@@ -19,7 +19,6 @@ class PreguntaController {
     }
 
     def create() {
-        log.debug("Nueva pregunta con titulo: " + params['titulo'])
         switch (request.method) {
         case 'GET':
             [preguntaInstance: new Pregunta(params)]
