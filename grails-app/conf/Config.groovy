@@ -105,6 +105,15 @@ log4j = {
 grails.plugins.springsecurity.userLookup.userDomainClassName = 'org.javamexico.portal.usuarios.Usuario'
 grails.plugins.springsecurity.userLookup.authorityJoinClassName = 'org.javamexico.portal.usuarios.UsuarioRol'
 grails.plugins.springsecurity.authority.className = 'org.javamexico.portal.usuarios.Rol'
+grails.plugins.springsecurity.password.algorithm='SHA-1'
+
+grails.plugins.springsecurity.requestMap.className = 'org.javamexico.portal.usuarios.Requestmap'
+grails.plugins.springsecurity.requestMap.urlField = 'url'
+grails.plugins.springsecurity.requestMap.configAttributeField = 'configAttribute'
+grails.plugins.springsecurity.securityConfigType = 'Requestmap'
+// Any requested URL that does not have a corresponding rule will be denied to all users.
+grails.plugins.springsecurity.rejectIfNoRule = true
+
 
 // Added by the Joda-Time plugin:
 grails.gorm.default.mapping = {
