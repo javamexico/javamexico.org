@@ -1,27 +1,35 @@
-import org.javamexico.portal.usuarios.Usuario
-import org.joda.time.LocalDate
+import groovy.sql.Sql
 
 class BootStrap {
 
+    def grailsApplication
+    def dataSource
+
     def init = { servletContext ->
 
-        def springSecurityService
-
-        if (!Usuario.count()){
-            new Usuario(
-                    username: 'benek',
-                    password: 'benekin',
-                    enabled: true,
-                    nombre: 'Javier Ramirez',
-                    correo: 'xbenek@java.net',
-                    fechaNacimiento: new LocalDate(1984, 3, 20),
-                    ubicacion: 'Queretaro',
-                    sitioWeb: 'www.javamexico.org/blogs/benek',
-                    bio: 'Algo aqui...'
-            ).save(failOnError: true)
-        }
+        loadSqlData("catalogos")
 
     }
     def destroy = {
+    }
+
+    def loadSqlData(archivo) {
+
+        try {
+            def is = grailsApplication.mainContext.getResource("classpath:sql/${archivo}.sql").inputStream
+            println is
+            def db = new Sql(dataSource)
+            println db
+            println "::::::::: Carga ${archivo}... 0% :::::::::"
+            is.eachLine { line ->
+                // Descomentar  println si no carga al 100% para ver donde truena
+                //println line
+                db.executeUpdate(line)
+            }
+            println "::::::::: Carga ${archivo}... 100% :::::::::"
+        } catch (ex) {
+            println "ocurrio algun error"
+            ex.printStackTrace()
+        }
     }
 }
